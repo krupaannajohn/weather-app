@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>weather</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <nav class="row" style="background-image: linear-gradient(to left,rgb(43, 43, 160),purple); color: white;">
+    <div class="col-md-6 offset-md-3 col-lg-3 offset-lg-4 text-center">
+      <h1>WEATHER APP</h1> 
+      <h6>Developed by Krupa 22112019</h6>
+  </div>
+  </nav>
+  <br />
+  <br />
+  <center class="row">
+    <form method="post" class="col-md-6 col-md-offset-3">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type="text" class="form-control" name="city" placeholder="Search">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+        <form>
+  </center>
+  <div class="row">
+    {% if country_code and coordinate and temp and pressure and humidity %}
+    <div class="col-md-6 col-md-offset-3">
+        <h1>{{name}} Weather</h1>
+        <h3>City: {{name}}</h3>
+        <h4>country code : {{country_code}}</h4>
+        <h5>coordinate : {{coordinate}}</h5>
+        <h5>temp : {{temp}}</h5>
+        <h5>pressure : {{pressure}} </h5>
+        <h5>humidity : {{humidity}}</h5>
+    </div>
+    {% endif %}
+  </div>
+
+  <h2>Weather History</h2>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>country_code</th>
+              <th>city</th>
+              <th>coordinate</th>
+              <th>temp</th>
+              <th>pressure</th>
+              <th>humidity</th>
+              <th>timestamp</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for bdata in bdata %}
+          <tr>
+            <td>{{ bdata.country_code }}</td>
+            <td>{{ bdata.city }}</td>
+            <td>{{ bdata.coordinate }}%</td>
+            <td>{{ bdata.temp }}</td>
+            <td>{{ bdata.pressure }}</td>
+            <td>{{ bdata.humidity }}</td>
+            <td>{{ bdata.timestamp }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+</body>
+
+</html>
