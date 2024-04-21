@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>weather</title>
+  <title>Weather</title>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
@@ -18,9 +18,9 @@
 <body>
   <nav class="row" style="background-image: linear-gradient(to left,rgb(43, 43, 160),purple); color: white;">
     <div class="col-md-6 offset-md-3 col-lg-3 offset-lg-4 text-center">
-      <h1>WEATHER APP</h1> 
+      <h1>WEATHER APP</h1>
       <h6>Developed by Krupa 22112019</h6>
-  </div>
+    </div>
   </nav>
   <br />
   <br />
@@ -34,18 +34,19 @@
             <i class="glyphicon glyphicon-search"></i>
           </button>
         </div>
-        <form>
+      </div>
+    </form>
   </center>
   <div class="row">
     {% if country_code and coordinate and temp and pressure and humidity %}
     <div class="col-md-6 col-md-offset-3">
         <h1>{{name}} Weather</h1>
         <h3>City: {{name}}</h3>
-        <h4>country code : {{country_code}}</h4>
-        <h5>coordinate : {{coordinate}}</h5>
-        <h5>temp : {{temp}}</h5>
-        <h5>pressure : {{pressure}} </h5>
-        <h5>humidity : {{humidity}}</h5>
+        <h4>Country Code: {{country_code}}</h4>
+        <h5>Coordinate: {{coordinate}}</h5>
+        <h5>Temperature: {{temp}}</h5>
+        <h5>Pressure: {{pressure}} </h5>
+        <h5>Humidity: {{humidity}}</h5>
     </div>
     {% endif %}
   </div>
@@ -54,13 +55,14 @@
   <table class="table">
       <thead>
           <tr>
-              <th>country_code</th>
-              <th>city</th>
-              <th>coordinate</th>
-              <th>temp</th>
-              <th>pressure</th>
-              <th>humidity</th>
-              <th>timestamp</th>
+              <th>Country Code</th>
+              <th>City</th>
+              <th>Coordinate</th>
+              <th>Temperature</th>
+              <th>Pressure</th>
+              <th>Humidity</th>
+              <th>Timestamp</th>
+              <th>Actions</th> <!-- Add a new column for actions -->
           </tr>
       </thead>
       <tbody>
@@ -68,16 +70,21 @@
           <tr>
             <td>{{ bdata.country_code }}</td>
             <td>{{ bdata.city }}</td>
-            <td>{{ bdata.coordinate }}%</td>
+            <td>{{ bdata.coordinate }}</td>
             <td>{{ bdata.temp }}</td>
             <td>{{ bdata.pressure }}</td>
             <td>{{ bdata.humidity }}</td>
             <td>{{ bdata.timestamp }}</td>
+            <td>
+              <form action="{% url 'delete_location' bdata.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </td>
           </tr>
           {% endfor %}
       </tbody>
   </table>
-</div>
 </body>
 
 </html>
